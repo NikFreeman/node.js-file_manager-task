@@ -1,6 +1,8 @@
 import { initApp } from "./init/initApp.js";
-import store from "./values/store.js";
+import { mainLoop } from "./loop/mainLoop.js";
+import { showCurrentDir } from "./loop/showCurrentDir.js";
 
 
 initApp();
-console.log(store);
+showCurrentDir();
+mainLoop();
