@@ -4,9 +4,10 @@ import {homedir} from 'os';
 import { sep } from "path";
 import {WELCOME} from '../values/consts.js'
 
+
 export function initApp(){
   store.username = extractUsername();
   store.sep = sep;
   store.currently_dir = homedir().split(store.sep);
-  console.log(WELCOME.replace("Username",store.username))
+  console.log(WELCOME.replace("Username",store.username));
 }

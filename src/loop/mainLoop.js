@@ -2,6 +2,13 @@ import {stdin, stdout} from "node:process";
 import { createInterface } from "node:readline/promises";
 import { showByeBye } from "./showByeBye.js";
 import { showCurrentDir } from "./showCurrentDir.js";
+import { handleCommandLine } from "./handleCommandLine.js";
+
+
+function exitApp(){
+  showByeBye();
+  process.exit(0)
+}
 
 export function mainLoop() {
   try {
@@ -9,17 +16,16 @@ export function mainLoop() {
     stdout.write('> ')
     rl.on('line', (chunk)=> {
       if (chunk == '.exit') {
-        showByeBye();
-        process.exit(0)}
+        exitApp();
+      }
       else {
-        console.log('process -->');
+        handleCommandLine(chunk);
         showCurrentDir();
-        stdout.write('> ')
+        stdout.write('> ');
       }
     })
     rl.on('close',()=>{
-      showByeBye();
-      process.exit(0)
+      exitApp();
     })
   }
   catch (e){

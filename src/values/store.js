@@ -4,4 +4,4 @@
   sep:''
 };
 
-export default store
+export default store;
