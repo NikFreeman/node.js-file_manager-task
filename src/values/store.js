@@ -1,6 +1,7 @@
  const store = {
   username: '',
-  currently_dir: ''
+  currently_dir: [],
+  sep:''
 };
 
 export default store
