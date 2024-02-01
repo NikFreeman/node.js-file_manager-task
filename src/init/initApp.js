@@ -9,5 +9,6 @@ export function initApp(){
   store.username = extractUsername();
   store.sep = sep;
   store.currently_dir = homedir().split(store.sep);
+  console.clear();
   console.log(WELCOME.replace("Username",store.username));
 }
