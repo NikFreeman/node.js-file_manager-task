@@ -19,6 +19,7 @@ export function mainLoop() {
         exitApp();
       }
       else {
+        if (chunk !='')
         handleCommandLine(chunk);
         showCurrentDir();
         stdout.write('> ');
