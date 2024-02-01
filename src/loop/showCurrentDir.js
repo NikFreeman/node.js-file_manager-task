@@ -1,7 +1,7 @@
-import store from "../values/store.js"
 import { CURRENT } from "../values/consts.js"
+import { currentDir } from "../helpers/currentDir.js";
 
 
 export function showCurrentDir(){
-  console.log(CURRENT + store.currently_dir.join(store.sep));  
+  console.log(CURRENT + currentDir());  
 }
