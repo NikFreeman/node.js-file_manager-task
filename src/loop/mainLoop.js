@@ -10,17 +10,17 @@ function exitApp(){
   process.exit(0)
 }
 
-export function mainLoop() {
+export async function mainLoop() {
   try {
     const rl=createInterface(stdin,stdout);
     stdout.write('> ')
-    rl.on('line', (chunk)=> {
+    rl.on('line', async (chunk)=> {
       if (chunk == '.exit') {
         exitApp();
       }
       else {
         if (chunk !='')
-        handleCommandLine(chunk);
+        await handleCommandLine(chunk);
         showCurrentDir();
         stdout.write('> ');
       }
