@@ -18,6 +18,6 @@ export async function ls(){
   console.table(result);  
   }
   catch {
-console.log(ERROR.OPERATION);
+    console.log(ERROR.OPERATION);
   }
 }
