@@ -1,4 +1,4 @@
-import { ERROR, amountOfCPU} from "../../values/consts.js";
+import { ERROR, AMOUNT_OF_CPU} from "../../values/consts.js";
 import {EOL, cpus,homedir,userInfo,arch} from 'os'
 import { CustomError } from "../../values/errors.js";
 
@@ -11,7 +11,7 @@ export function os(params){
       break;
     case "--cpus":
       const cpu = cpus();
-      console.log(amountOfCPU+cpu.length);
+      console.log(AMOUNT_OF_CPU+cpu.length);
       cpu.forEach((item) =>{
         console.log(`model: ${item.model} speed: ${item.speed}`);
       })
