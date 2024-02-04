@@ -1,11 +1,11 @@
 import {createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
-import { buildPath } from '../../helpers/buildPath.js';
-import { CustomError } from '../../values/errors.js';
-import { ERROR } from '../../values/consts.js';
 import { stdout } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 import { EOL } from 'node:os';
+import { buildPath } from '../../helpers/buildPath.js';
+import { CustomError } from '../../values/errors.js';
+import { ERROR } from '../../values/consts.js';
 
 
 export async function cat(params){
