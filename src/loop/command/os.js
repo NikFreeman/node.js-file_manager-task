@@ -1,8 +1,10 @@
 import { ERROR, amountOfCPU} from "../../values/consts.js";
 import {EOL, cpus,homedir,userInfo,arch} from 'os'
+import { CustomError } from "../../values/errors.js";
 
 
-export function os(params){
+export function os(params){ 
+  if (params !=''){
   switch (params) {
     case "--EOL" :
       console.log(EOL);
@@ -24,6 +26,10 @@ export function os(params){
       console.log(arch());
       break;
     default:
-console.log(ERROR.OPERATION);
+  throw new CustomError(ERROR.OPERATION)
   } 
+}
+else {
+  throw new CustomError(ERROR.INPUT);
+}
 }

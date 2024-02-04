@@ -3,10 +3,10 @@ import { currentDir } from './currentDir.js';
 
 export function buildPath(params){
 let tempPath;  
-  if (isAbsolute(params.trim())) 
-    tempPath = parse(params.trim())
+  if (isAbsolute(params)) 
+    tempPath = parse(params)
   else
-    tempPath=parse(normalize(`${currentDir()}${sep}${params.trim()}`));
+    tempPath=parse(normalize(`${currentDir()}${sep}${params}`));
   const pathTo = (tempPath.base !='' && tempPath.root != tempPath.dir) ?
     `${tempPath.dir}${sep}${tempPath.base}`:
     (tempPath.base !='' && tempPath.root == tempPath.dir)?

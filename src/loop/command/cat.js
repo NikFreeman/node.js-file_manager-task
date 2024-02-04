@@ -1,7 +1,8 @@
 import {createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import { buildPath } from '../../helpers/buildPath.js';
-import { InvalidOperationError } from '../../values/errors.js';
+import { CustomError } from '../../values/errors.js';
+import { ERROR } from '../../values/consts.js';
 import { stdout } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 import { EOL } from 'node:os';
@@ -9,7 +10,6 @@ import { EOL } from 'node:os';
 
 export async function cat(params){
   const pathToFile = buildPath(params); 
-try{
   try {
     const result = (await stat(pathToFile)).isFile();
     if (result) {
@@ -18,15 +18,10 @@ try{
       stdout.write(EOL);
     }
     else {
-      throw new InvalidOperationError();
+      throw new CustomError(ERROR.OPERATION);
     }
   }
   catch {
-    throw new InvalidOperationError();
+    throw new CustomError(ERROR.OPERATION);
   }
-}
-catch (e){
-  if (e instanceof InvalidOperationError)
-    console.log(e.message);
-}  
 }

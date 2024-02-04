@@ -1,29 +1,25 @@
 
 import { stat } from 'fs/promises';
-import { InvalidOperationError } from '../../values/errors.js';
+import { CustomError } from '../../values/errors.js';
+import { ERROR } from '../../values/consts.js';
 import { store } from '../../values/store.js';
 import { buildPath } from '../../helpers/buildPath.js';
 
 
 export async function cd(params){
-  const pathToDir = buildPath(params);  
+  const pathToDir = buildPath(params); 
+   
   try {
-    try {
       const result = (await stat(pathToDir)).isDirectory();
       if (result) {
         store.currently_dir.length = 0;
         store.currently_dir = pathToDir.split(store.sep);
    } 
    else {
-    throw new InvalidOperationError();
+    throw new CustomError(ERROR.OPERATION);
    }
   }
   catch {
-    throw new InvalidOperationError();
+    throw new CustomError(ERROR.OPERATION);
   }
-}
-catch (e){
-  if (e instanceof InvalidOperationError)
-    console.log(e.message);
-}
 }

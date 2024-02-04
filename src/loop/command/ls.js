@@ -1,11 +1,11 @@
 import { currentDir } from '../../helpers/currentDir.js';
 import { readdir } from 'node:fs/promises';
 import { TYPE_DIRECTORY,TYPE_FILE } from '../../values/consts.js';
-import { InvalidOperationError } from '../../values/errors.js';
+import { CustomError } from '../../values/errors.js';
+import { ERROR } from '../../values/consts.js';
 
 
 export async function ls(){
-  try{
   try {
   const result =[];
   const dirContent = await readdir(currentDir(),{withFileTypes:true});
@@ -20,11 +20,6 @@ export async function ls(){
   console.table(result);  
   }
   catch {
-    throw new InvalidOperationError();
+    throw new CustomError(ERROR.OPERATION);
   }
-}
-catch (e){
-  if (e instanceof InvalidOperationError)
-    console.log(e.message);
-}
 }

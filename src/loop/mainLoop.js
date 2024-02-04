@@ -29,7 +29,10 @@ export async function mainLoop() {
       exitApp();
     })
   }
-  catch (e){
-    console.error(e.message);
-  }
+  catch (e){ 
+    if (e instanceof CustomError)
+      console.log(e.message);
+    else
+      throw e;
+  }     
 }

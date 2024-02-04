@@ -1,16 +1,6 @@
-import { ERROR } from "./consts.js";
-
-export class WrongUsernameError extends Error {
+export class CustomError extends Error {
   constructor(message) {
     super(message); 
-    this.name = "WrongUsernameError";     
+    this.name = "CustomError";     
   }
-}
-
-export class InvalidOperationError extends Error{
-  constructor() {
-    super(); 
-    this.name = "InvalidOperationError"; 
-    this.message = ERROR.OPERATION;
- }
 }

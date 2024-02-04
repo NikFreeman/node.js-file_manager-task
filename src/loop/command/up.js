@@ -7,5 +7,4 @@ export function up(){
   }
   else 
    if (store.currently_dir.length>0) store.currently_dir.pop()
-
 }
