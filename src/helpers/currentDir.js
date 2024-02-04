@@ -1,4 +1,4 @@
-import store from "../values/store.js";
+import {store} from "../values/store.js";
 
 export function currentDir() {
   if (process.platform == 'win32') 
