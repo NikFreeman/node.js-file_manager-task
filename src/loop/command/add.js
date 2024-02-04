@@ -7,7 +7,7 @@ import {checkFilename} from '../../helpers/checkFilename.js'
 
 
 export async function add(params){
-  
+  if (params == '') throw new CustomError(ERROR.INPUT);
   const tempFilename = params;
   if(checkFilename(tempFilename)) {
       try {

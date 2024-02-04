@@ -19,5 +19,5 @@ export async function handleCommandLine(commandLine) {
         throw e;
     }     
   }
-   else throw CustomError(ERROR.INPUT)
+   else throw new CustomError(ERROR.INPUT)
 }

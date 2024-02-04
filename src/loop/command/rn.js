@@ -8,8 +8,15 @@ import { ERROR } from '../../values/consts.js';
 
 export async function rn(params){
   const {firstParam, secondParam} = parseParamsString(params);
-  const oldPath = firstParam;
-  const newFileName = secondParam;
+  let oldPath;
+  let newFileName;
+
+  if (firstParam !='')
+    oldPath = firstParam;
+  else throw new CustomError(ERROR.INPUT);
+  if (secondParam !='')
+    newFileName = secondParam;
+  else throw new CustomError(ERROR.INPUT);
   const pathToFile = buildPath(oldPath); 
   let result;
     try {

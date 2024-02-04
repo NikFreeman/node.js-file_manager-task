@@ -3,6 +3,7 @@ import { createInterface } from "node:readline/promises";
 import { showByeBye } from "./showByeBye.js";
 import { showCurrentDir } from "./showCurrentDir.js";
 import { handleCommandLine } from "./handleCommandLine.js";
+import { CustomError } from "../values/errors.js";
 
 
 function exitApp(){
@@ -19,8 +20,17 @@ export async function mainLoop() {
         exitApp();
       }
       else {
-        if (chunk !='')
-        await handleCommandLine(chunk);
+        if (chunk !=''){
+          try {
+            await handleCommandLine(chunk);
+          }
+          catch (e) {
+            if (e instanceof CustomError)
+              console.log(e.message);
+            else
+          throw e;
+          }
+        }
         showCurrentDir();
         stdout.write('> ');
       }
@@ -29,7 +39,7 @@ export async function mainLoop() {
       exitApp();
     })
   }
-  catch (e){ 
+  catch (e){     
     if (e instanceof CustomError)
       console.log(e.message);
     else

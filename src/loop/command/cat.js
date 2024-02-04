@@ -9,6 +9,7 @@ import { EOL } from 'node:os';
 
 
 export async function cat(params){
+  if (params == '') throw new CustomError(ERROR.INPUT);
   const pathToFile = buildPath(params); 
   try {
     const result = (await stat(pathToFile)).isFile();
