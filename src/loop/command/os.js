@@ -2,8 +2,8 @@ import { ERROR, amountOfCPU} from "../../values/consts.js";
 import {EOL, cpus,homedir,userInfo,arch} from 'os'
 
 
-export function os(param){
-  switch (param.trim()) {
+export function os(params){
+  switch (params) {
     case "--EOL" :
       console.log(EOL);
       break;

@@ -7,7 +7,7 @@ import {checkFilename} from '../../helpers/checkFilename.js'
 
 export async function add(params){
   
-  const tempFilename = params.trim();
+  const tempFilename = params;
   if(checkFilename(tempFilename)) {
     try {
     const fileToCreate = await open(join(currentDir(),tempFilename),"w");
