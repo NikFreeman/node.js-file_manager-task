@@ -10,7 +10,6 @@ export async function rn(params){
   const {firstParam, secondParam} = parseParamsString(params);
   let oldPath;
   let newFileName;
-
   if (firstParam !='')
     oldPath = firstParam;
   else throw new CustomError(ERROR.INPUT);

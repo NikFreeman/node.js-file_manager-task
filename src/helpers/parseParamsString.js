@@ -15,8 +15,11 @@ export function parseParamsString(params){
     secondParam = (params.slice(params.indexOf(firstChar,(params.indexOf(firstChar,1)))+2)) 
   }
   else {
+    if (params.indexOf(' ') !=-1) {
     firstParam = (params.slice(0,(params.indexOf(' '))))
     secondParam = (params.slice(params.indexOf(' ')+1))
+  } else 
+  {firstParam = params;}
 }
 firstParam = removeQuotes(firstParam);
 secondParam = removeQuotes(secondParam);
