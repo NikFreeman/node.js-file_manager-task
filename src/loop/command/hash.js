@@ -7,15 +7,14 @@ import { parseParamsString } from '../../helpers/parseParamsString.js';
 import { buildPath } from '../../helpers/buildPath.js';
 import { CustomError } from '../../values/errors.js';
 import { ERROR } from '../../values/consts.js';
+import { isEmptyParam } from '../../helpers/isEmptyParam.js';
 
 
 export async function hash(params){
   const {firstParam } = parseParamsString(params);
-  let fileToHash;
-
-  if (firstParam !='')
-  fileToHash = firstParam;
-  else throw new CustomError(ERROR.INPUT);
+  
+  if (isEmptyParam(firstParam)) throw new CustomError(ERROR.INPUT);
+  const fileToHash = firstParam;
 
   const pathToFile = buildPath(fileToHash);
   

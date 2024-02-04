@@ -5,36 +5,29 @@ import { checkFilename } from '../../helpers/checkFilename.js';
 import { parseParamsString } from '../../helpers/parseParamsString.js';
 import { CustomError } from '../../values/errors.js';
 import { ERROR } from '../../values/consts.js';
+import { isEmptyParam } from '../../helpers/isEmptyParam.js';
+import { isFile } from '../../helpers/isFile.js';
 
 export async function rn(params){
   const {firstParam, secondParam} = parseParamsString(params);
-  let oldPath;
-  let newFileName;
-  if (firstParam !='')
-    oldPath = firstParam;
-  else throw new CustomError(ERROR.INPUT);
-  if (secondParam !='')
-    newFileName = secondParam;
-  else throw new CustomError(ERROR.INPUT);
+
+  if (isEmptyParam(firstParam)) throw new CustomError(ERROR.INPUT);
+  const oldPath = firstParam;
+
+  if (isEmptyParam(secondParam)) throw new CustomError(ERROR.INPUT);
+  const newFileName = secondParam;
+  
   const pathToFile = buildPath(oldPath); 
-  let result;
-    try {
-    result = (await stat(pathToFile)).isFile();
-    }
-    catch {
-      throw new CustomError(ERROR.OPERATION);
-    }
-    if (result) {
-      const dir = parse(pathToFile).dir;
-      if (checkFilename(newFileName)) {
-        try {
-          await rename(pathToFile,join(dir,newFileName))     
-        }
-        catch {
-          throw new CustomError(ERROR.OPERATION);
-        }
-      }  
-      else throw new CustomError(ERROR.OPERATION);
-    }
-  else throw new CustomError(ERROR.OPERATION);
+  const result = await isFile(pathToFile);
+  
+  if (!result) throw new CustomError(ERROR.OPERATION);
+  if (!checkFilename(newFileName)) throw new CustomError(ERROR.OPERATION);
+  
+  try {
+    const dir = parse(pathToFile).dir;
+    await rename(pathToFile,join(dir,newFileName))     
+  }
+  catch {
+    throw new CustomError(ERROR.OPERATION);
+  }
 }   

@@ -1,24 +1,22 @@
-import {open} from  'fs/promises';
+import { open } from  'fs/promises';
 import { CustomError } from '../../values/errors.js';
 import { ERROR } from '../../values/consts.js';
 import { join } from 'path';
 import { currentDir } from '../../helpers/currentDir.js';
-import {checkFilename} from '../../helpers/checkFilename.js'
+import { checkFilename } from '../../helpers/checkFilename.js';
+import { isEmptyParam } from '../../helpers/isEmptyParam.js';
 
 
 export async function add(params){
-  if (params == '') throw new CustomError(ERROR.INPUT);
-  const tempFilename = params;
-  if(checkFilename(tempFilename)) {
-      try {
-        const fileToCreate = await open(join(currentDir(),tempFilename),"w");
-        fileToCreate.close();
-      }
-      catch {
-        throw new CustomError(ERROR.OPERATION);
-      }
-    }
-    else {
-      throw new CustomError(ERROR.OPERATION);
-    }    
+  if (isEmptyParam(params)) throw new CustomError(ERROR.INPUT);
+  if (!checkFilename(params)) throw new CustomError(ERROR.OPERATION);
+
+  try {
+    const fileToCreate = await open(join(currentDir(),params),"w");
+    fileToCreate.close();
+  }
+  catch {
+    throw new CustomError(ERROR.OPERATION);
+  }
 }
+  

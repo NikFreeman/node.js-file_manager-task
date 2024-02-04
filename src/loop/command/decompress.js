@@ -13,7 +13,7 @@ import { isDirectory } from '../../helpers/isDirectory.js';
 
 export async function decompress(params){
   const {firstParam, secondParam } = parseParamsString(params);
-console.log(firstParam,secondParam)
+
   if (isEmptyParam(firstParam)) {throw new CustomError(ERROR.INPUT)}
   const sourcePath = firstParam;
 
@@ -28,7 +28,7 @@ console.log(firstParam,secondParam)
   
   if (checkSource && checkDistionation) {
   const filename = parse(pathToCompress).base.slice(0,-3);
-  console.log(filename)
+
   try {
   await pipeline(createReadStream(pathToCompress),createBrotliDecompress(), createWriteStream(join(pathFromCompress,filename)))
   }

@@ -1,10 +1,10 @@
 import { ERROR, AMOUNT_OF_CPU} from "../../values/consts.js";
 import {EOL, cpus,homedir,userInfo,arch} from 'os'
 import { CustomError } from "../../values/errors.js";
-
+import { isEmptyParam } from "../../helpers/isEmptyParam.js";
 
 export function os(params){ 
-  if (params !=''){
+  if (isEmptyParam(params)) throw new CustomError(ERROR.INPUT);
   switch (params) {
     case "--EOL" :
       console.log(EOL);
@@ -28,8 +28,4 @@ export function os(params){
     default:
   throw new CustomError(ERROR.OPERATION)
   } 
-}
-else {
-  throw new CustomError(ERROR.INPUT);
-}
 }
