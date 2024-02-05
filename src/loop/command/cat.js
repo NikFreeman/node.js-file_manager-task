@@ -7,12 +7,13 @@ import { CustomError } from '../../values/errors.js';
 import { ERROR } from '../../values/consts.js';
 import { isEmptyParam } from '../../helpers/isEmptyParam.js';
 import { isFile } from '../../helpers/isFile.js';
+import { parseParamsString } from '../../helpers/parseParamsString.js';
 
 
 export async function cat(params){
   const {firstParam } = parseParamsString(params);
   if (isEmptyParam(firstParam)) throw new CustomError(ERROR.INPUT);
-  
+
   const pathToFile = buildPath(firstParam); 
   const result = await isFile(pathToFile);
   if (!result) throw new CustomError(ERROR.OPERATION);

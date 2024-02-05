@@ -5,6 +5,7 @@ import { join } from 'path';
 import { currentDir } from '../../helpers/currentDir.js';
 import { checkFilename } from '../../helpers/checkFilename.js';
 import { isEmptyParam } from '../../helpers/isEmptyParam.js';
+import { parseParamsString } from '../../helpers/parseParamsString.js';
 
 
 export async function add(params){
