@@ -1,0 +1,31 @@
+import { ERROR, AMOUNT_OF_CPU} from "../../values/consts.js";
+import {EOL, cpus,homedir,userInfo,arch} from 'os'
+import { CustomError } from "../../values/errors.js";
+import { isEmptyParam } from "../../helpers/isEmptyParam.js";
+
+export function os(params){ 
+  if (isEmptyParam(params)) throw new CustomError(ERROR.INPUT);
+  switch (params) {
+    case "--EOL" :
+      console.log(EOL);
+      break;
+    case "--cpus":
+      const cpu = cpus();
+      console.log(AMOUNT_OF_CPU+cpu.length);
+      cpu.forEach((item) =>{
+        console.log(`model: ${item.model} speed: ${item.speed}`);
+      })
+      break;
+    case "--homedir":
+      console.log(homedir());      
+      break;
+    case "--username":
+      console.log(userInfo().username);
+      break;
+    case "--architecture":
+      console.log(arch());
+      break;
+    default:
+  throw new CustomError(ERROR.OPERATION)
+  } 
+}
