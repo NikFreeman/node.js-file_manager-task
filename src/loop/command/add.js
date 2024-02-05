@@ -8,11 +8,12 @@ import { isEmptyParam } from '../../helpers/isEmptyParam.js';
 
 
 export async function add(params){
-  if (isEmptyParam(params)) throw new CustomError(ERROR.INPUT);
-  if (!checkFilename(params)) throw new CustomError(ERROR.OPERATION);
+  const {firstParam } = parseParamsString(params);
+  if (isEmptyParam(firstParam)) throw new CustomError(ERROR.INPUT);
+  if (!checkFilename(firstParam)) throw new CustomError(ERROR.OPERATION);
 
   try {
-    const fileToCreate = await open(join(currentDir(),params),"w");
+    const fileToCreate = await open(join(currentDir(),firstParam),"w");
     fileToCreate.close();
   }
   catch {

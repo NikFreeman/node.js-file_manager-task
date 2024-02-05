@@ -10,8 +10,10 @@ import { isFile } from '../../helpers/isFile.js';
 
 
 export async function cat(params){
-  if (isEmptyParam(params)) throw new CustomError(ERROR.INPUT);
-  const pathToFile = buildPath(params); 
+  const {firstParam } = parseParamsString(params);
+  if (isEmptyParam(firstParam)) throw new CustomError(ERROR.INPUT);
+  
+  const pathToFile = buildPath(firstParam); 
   const result = await isFile(pathToFile);
   if (!result) throw new CustomError(ERROR.OPERATION);
 
