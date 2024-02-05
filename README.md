@@ -83,7 +83,7 @@ List of operations and their syntax:
     ```bash
     add new_file_name
     ```
-
+  **If file exists it truncated.**
     [Naming Files, Paths, and Namespaces](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file)
 
   The except following reserved characters:
